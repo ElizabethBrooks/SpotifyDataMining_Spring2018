@@ -1,0 +1,32 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="Loudness <= 14.4715\ngini = 0.9715\nsamples = 412751"] ;
+1 [label="Instrumentalness <= 0.3155\ngini = 0.9769\nsamples = 318816"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="Loudness <= 8.6585\ngini = 0.9795\nsamples = 246305"] ;
+1 -> 2 ;
+3 [label="gini = 0.9808\nsamples = 173945"] ;
+2 -> 3 ;
+4 [label="gini = 0.9752\nsamples = 72360"] ;
+2 -> 4 ;
+5 [label="Duration <= 332196.5\ngini = 0.9626\nsamples = 72511"] ;
+1 -> 5 ;
+6 [label="gini = 0.9693\nsamples = 46656"] ;
+5 -> 6 ;
+7 [label="gini = 0.9469\nsamples = 25855"] ;
+5 -> 7 ;
+8 [label="Duration <= 601901.5\ngini = 0.9364\nsamples = 93935"] ;
+0 -> 8 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+9 [label="Loudness <= 17.2895\ngini = 0.9397\nsamples = 87140"] ;
+8 -> 9 ;
+10 [label="gini = 0.9549\nsamples = 23618"] ;
+9 -> 10 ;
+11 [label="gini = 0.9329\nsamples = 63522"] ;
+9 -> 11 ;
+12 [label="Speechiness <= 0.0518\ngini = 0.8837\nsamples = 6795"] ;
+8 -> 12 ;
+13 [label="gini = 0.9012\nsamples = 5101"] ;
+12 -> 13 ;
+14 [label="gini = 0.8163\nsamples = 1694"] ;
+12 -> 14 ;
+}

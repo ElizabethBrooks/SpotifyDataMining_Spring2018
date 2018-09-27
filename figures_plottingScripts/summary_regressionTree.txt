@@ -1,0 +1,60 @@
+> summary(tree)
+Call:
+rpart(formula = Popularity ~ Danceability + Energy + Key + Loudness + 
+    Mode + Speechiness + Acousticness + Instrumentalness + Liveness + 
+    Valence + Tempo + TimeSignature + Duration, data = pop_data, 
+    method = "anova")
+  n= 515939 
+
+          CP nsplit rel error    xerror        xstd
+1 0.08452563      0 1.0000000 1.0000030 0.001704609
+2 0.02847115      1 0.9154744 0.9157490 0.001678890
+3 0.01000000      2 0.8870032 0.8875574 0.001636948
+
+Variable importance
+        Loudness           Energy     Acousticness Instrumentalness 
+              31               21               17               15 
+    Danceability          Valence         Duration 
+               8                7                2 
+
+Node number 1: 515939 observations,    complexity param=0.08452563
+  mean=21.75331, MSE=310.9656 
+  left son=2 (130783 obs) right son=3 (385156 obs)
+  Primary splits:
+      Loudness         < 13.5145   to the right, improve=0.08452563, (0 missing)
+      Acousticness     < 0.8335    to the right, improve=0.07047104, (0 missing)
+      Energy           < 0.2975    to the left,  improve=0.06770697, (0 missing)
+      Instrumentalness < 0.02945   to the right, improve=0.06201646, (0 missing)
+      Danceability     < 0.4195    to the left,  improve=0.04075925, (0 missing)
+  Surrogate splits:
+      Energy           < 0.2805    to the left,  agree=0.916, adj=0.670, (0 split)
+      Acousticness     < 0.8615    to the right, agree=0.885, adj=0.545, (0 split)
+      Danceability     < 0.3315    to the left,  agree=0.807, adj=0.238, (0 split)
+      Valence          < 0.1075    to the left,  agree=0.797, adj=0.200, (0 split)
+      Instrumentalness < 0.8665    to the right, agree=0.779, adj=0.129, (0 split)
+
+Node number 2: 130783 observations
+  mean=12.95512, MSE=214.4633 
+
+Node number 3: 385156 observations,    complexity param=0.02847115
+  mean=24.74081, MSE=308.524 
+  left son=6 (109481 obs) right son=7 (275675 obs)
+  Primary splits:
+      Instrumentalness < 0.07265   to the right, improve=0.038440580, (0 missing)
+      Duration         < 320472    to the right, improve=0.025017630, (0 missing)
+      Loudness         < 7.6815    to the right, improve=0.015784420, (0 missing)
+      Acousticness     < 0.003775  to the left,  improve=0.006497583, (0 missing)
+      Danceability     < 0.3905    to the left,  improve=0.004193516, (0 missing)
+  Surrogate splits:
+      Duration     < 343225.5  to the right, agree=0.761, adj=0.159, (0 split)
+      Valence      < 0.09485   to the left,  agree=0.729, adj=0.047, (0 split)
+      Acousticness < 0.0008625 to the left,  agree=0.723, adj=0.024, (0 split)
+      Danceability < 0.1955    to the left,  agree=0.719, adj=0.011, (0 split)
+      Energy       < 0.9915    to the right, agree=0.717, adj=0.004, (0 split)
+
+Node number 6: 109481 observations
+  mean=19.27608, MSE=250.4384 
+
+Node number 7: 275675 observations
+  mean=26.91106, MSE=315.0222 
+

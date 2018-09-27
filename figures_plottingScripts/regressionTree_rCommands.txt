@@ -1,0 +1,62 @@
+library("rpart")
+install.packages('randomForest')
+
+data <- read.csv("trackFeatures_totalTrackFeaturesMapped_header.csv")
+pop_data<-as.data.frame(data)
+
+tree <- rpart(Popularity~Danceability+Energy+Key+Loudness+Mode+Speechiness+Acousticness+Instrumentalness+Liveness+Valence+Tempo+TimeSignature+Duration, method="anova", data=pop_data)
+
+forest <- randomForest(Popularity~Danceability+Energy+Key+Loudness+Mode+Speechiness+Acousticness+Instrumentalness+Liveness+Valence+Tempo+TimeSignature+Duration, data=pop_data)
+
+print(forest) #View results
+importance(forest) #Importance of each predictor
+
+printcp(tree) #Display results
+plotcp(tree) #Visualize cross-validation
+summary(tree) #Detailed summary of splits
+
+# create additional plots
+rsq.rpart(tree) # visualize cross-validation results  
+
+# plot tree
+plot(tree, uniform=TRUE, main="Regression Tree for Track Popularity")
+text(tree, use.n=TRUE, all=TRUE, cex=.8)
+
+# create attractive postcript plot of tree
+post(tree, file = "regressionTree_popularity.ps", title = "Regression Tree for Track Popularity")
+
+post(forest, file = "randomForest_popularity.ps", title = "Regression Tree for Track Popularity")
+
+# prune the tree
+treep<- prune(tree, cp=0.01) # from cptable   
+
+# plot the pruned tree
+plot(treep, uniform=TRUE, main="Pruned Regression Tree for Track Popularity")
+text(treep, use.n=TRUE, all=TRUE, cex=.8)
+post(treep, file = "regressionTree_popularity_pruned.ps",
+   title = "Pruned Regression Tree for Track Popularity")
+
+#### Binned Popularity ####
+bintree <- rpart(Bin~Danceability+Energy+Key+Loudness+Mode+Speechiness+Acousticness+Instrumentalness+Liveness+Valence+Tempo+TimeSignature+Duration, method="class", data=pop_data)
+
+binforest <- randomForest(Bin~Danceability+Energy+Key+Loudness+Mode+Speechiness+Acousticness+Instrumentalness+Liveness+Valence+Tempo+TimeSignature+Duration, data=pop_data)
+
+#Plot the binned tree
+plot(bintree, uniform=TRUE,
+   main="Classification Tree for Binned Track Popularity")
+text(bintree, use.n=TRUE, all=TRUE, cex=.8)
+
+# create attractive postcript plot of tree
+post(bintree, file = "decisionTree_bins.ps", title = "Regression Tree for Binned Track Popularity")
+
+post(binforest, file = "randomForest_bins.ps", title = "Regression Tree for Binned Track Popularity")
+
+ # prune the tree
+bintreep <- prune(bintree, cp=bintree$cptable[which.min(bintree$cptable[,"xerror"]),"CP"])
+
+# plot the pruned tree
+plot(bintreep, uniform=TRUE,
+   main="Pruned Classification Tree for Binned Track Popularity")
+text(bintreep, use.n=TRUE, all=TRUE, cex=.8)
+post(bintreep, file = "decisionTree_bins_pruned.ps",
+   title = "Pruned Classification Tree for Binned Track Popularity")

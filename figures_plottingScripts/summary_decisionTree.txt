@@ -1,0 +1,68 @@
+> summary(bintree)
+Call:
+rpart(formula = Bin ~ Danceability + Energy + Key + Loudness + 
+    Mode + Speechiness + Acousticness + Instrumentalness + Liveness + 
+    Valence + Tempo + TimeSignature + Duration, data = pop_data, 
+    method = "class")
+  n= 515939 
+
+          CP nsplit rel error    xerror       xstd
+1 0.02367424      0 1.0000000 1.0000000 0.00129563
+2 0.01000000      2 0.9526515 0.9534147 0.00129867
+
+Variable importance
+        Loudness           Energy     Acousticness Instrumentalness 
+              32               22               18               13 
+    Danceability          Valence         Duration 
+               8                7                1 
+
+Node number 1: 515939 observations,    complexity param=0.02367424
+  predicted class=1  expected loss=0.5358812  P(node) =1
+    class counts: 59990 239457 178360 36920  1211     1
+   probabilities: 0.116 0.464 0.346 0.072 0.002 0.000 
+  left son=2 (130800 obs) right son=3 (385139 obs)
+  Primary splits:
+      Loudness         < 13.5135   to the right, improve=9936.443, (0 missing)
+      Acousticness     < 0.8335    to the right, improve=8425.209, (0 missing)
+      Energy           < 0.2945    to the left,  improve=7890.255, (0 missing)
+      Instrumentalness < 0.05605   to the right, improve=6368.144, (0 missing)
+      Danceability     < 0.4025    to the left,  improve=4495.263, (0 missing)
+  Surrogate splits:
+      Energy           < 0.2805    to the left,  agree=0.916, adj=0.670, (0 split)
+      Acousticness     < 0.8615    to the right, agree=0.885, adj=0.545, (0 split)
+      Danceability     < 0.3315    to the left,  agree=0.807, adj=0.238, (0 split)
+      Valence          < 0.1075    to the left,  agree=0.797, adj=0.200, (0 split)
+      Instrumentalness < 0.8665    to the right, agree=0.779, adj=0.129, (0 split)
+
+Node number 2: 130800 observations
+  predicted class=1  expected loss=0.396445  P(node) =0.2535183
+    class counts: 25356 78945 22810  3667    22     0
+   probabilities: 0.194 0.604 0.174 0.028 0.000 0.000 
+
+Node number 3: 385139 observations,    complexity param=0.02367424
+  predicted class=1  expected loss=0.5832362  P(node) =0.7464817
+    class counts: 34634 160512 155550 33253  1189     1
+   probabilities: 0.090 0.417 0.404 0.086 0.003 0.000 
+  left son=6 (96226 obs) right son=7 (288913 obs)
+  Primary splits:
+      Instrumentalness < 0.1695    to the right, improve=2618.7950, (0 missing)
+      Duration         < 321775    to the right, improve=1814.4850, (0 missing)
+      Loudness         < 8.2065    to the right, improve=1144.8810, (0 missing)
+      Acousticness     < 0.8965    to the right, improve= 524.9827, (0 missing)
+      Danceability     < 0.3945    to the left,  improve= 258.7311, (0 missing)
+  Surrogate splits:
+      Duration     < 359020    to the right, agree=0.785, adj=0.140, (0 split)
+      Valence      < 0.07285   to the left,  agree=0.760, adj=0.038, (0 split)
+      Danceability < 0.1795    to the left,  agree=0.752, adj=0.008, (0 split)
+      Acousticness < 1.215e-05 to the left,  agree=0.751, adj=0.004, (0 split)
+      Energy       < 0.9955    to the right, agree=0.751, adj=0.003, (0 split)
+
+Node number 6: 96226 observations
+  predicted class=1  expected loss=0.4934945  P(node) =0.1865065
+    class counts: 13440 48739 30686  3349    12     0
+   probabilities: 0.140 0.507 0.319 0.035 0.000 0.000 
+
+Node number 7: 288913 observations
+  predicted class=2  expected loss=0.5678145  P(node) =0.5599751
+    class counts: 21194 111773 124864 29904  1177     1
+   probabilities: 0.073 0.387 0.432 0.104 0.004 0.000 
