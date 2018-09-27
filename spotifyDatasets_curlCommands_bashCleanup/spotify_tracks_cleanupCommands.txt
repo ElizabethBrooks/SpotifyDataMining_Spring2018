@@ -1,0 +1,31 @@
+sed -n '/"uri" :/p' albums_aa.txt > albums_aa_uri.txt
+sed 's/"uri" : "spotify:artist:.*//' albums_aa_uri.txt > albums_aa_uri_noDuplicates.txt
+sed 's/ //g' albums_aa_uri_noDuplicates.txt > albums_aa_uri.txt
+sed '/^\s*$/d' albums_aa_uri.txt > albums_aa_uri_noDuplicates.txt
+sed -r 's/.{21}//' albums_aa_uri_noDuplicates.txt > albums_aa_uri.txt
+sed -i 's|["]||g' albums_aa_uri.txt
+awk '!seen[$0]++' albums_aa_uri.txt > albums_aa_uri_noDuplicates.txt
+
+cat catagoriesTracks_US_ids_noDuplicates.txt catagoriesAlbums_US_ids_noDuplicates.txt > catagoriesTotalTracks_US_ids.txt
+wc -l catagoriesTotalTracks_US_ids.txt
+awk '{a=a s $0;s=" "}END{print a}' catagoriesTotalTracks_US_ids.txt  > catagoriesTotalTracks_US_ids_noDuplicates.txt
+wc -l catagoriesTotalTracks_US_ids_noDuplicates.txt
+
+split -n l/4 catagoriesTotalTracks_US_ids_noDuplicates.txt
+
+wc -l file.txt //Count the number of lines in a file
+paste -d'\n' file1.txt file2.txt > file3.txt //Append files line-by-line
+split -n l/10 file.txt //Split file into pieces
+awk '{a=a s $0;s=" "}END{print a}' mytext.txt  > mytext.txt //remove newlines
+sed 's/"uri" : "spotify:artist:.*//' file.txt > no-remaining.txt //Remove everything in a file following a pattern
+sed 's/ //g' input.txt > no-spaces.txt //Remove white space
+sed -r 's/.{22}//' input.txt > no-first.txt //Remove first 22 characters of each line
+sed -i 's|["]||g' file.txt //Remove quotes
+awk '!seen[$0]++' file.txt > no-duplicates.txt //Remove duplicates
+sed -i 's/,/ /g' file.txt //Replace commas with spaces
+sed -i 's|[,]||g' file.txt //Remove commas
+sed -i 's/^ *//g' file.txt
+paste -d, -s file.txt //Append lines of text file comma separated
+perl -pe 's/\n/ / unless eof' file.txt //Append lines of text file space separated
+sed 'n; d' //Keep odd lines
+sed '1d; n; d' //Keep even lines

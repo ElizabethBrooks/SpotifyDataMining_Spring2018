@@ -1,0 +1,78 @@
+paste -d, trackFeatures_id.txt trackFeatures_danceability.txt trackFeatures_energy.txt trackFeatures_key.txt trackFeatures_loudness.txt trackFeatures_mode.txt trackFeatures_speechiness.txt trackFeatures_acousticness.txt trackFeatures_instrumentalness.txt trackFeatures_liveness.txt trackFeatures_valence.txt trackFeatures_tempo.txt > trackFeatures_totalTrackFeatures.txt
+
+paste -d, trackData_id.txt trackData_duration.txt trackData_explicit.txt trackData_popularity.txt > trackData_totalTrackData.txt
+
+sed -n '/"danceability" : /p' trackFeatures_a.txt > trackFeatures_a_dance.txt
+sed -i 's|["danceability" : ,]||g' trackFeatures_a_dance.txt
+
+sed -n '/"energy" : /p' trackFeatures_a.txt > trackFeatures_a_engy.txt
+sed -i 's|["energy" : ,]||g' trackFeatures_a_engy.txt
+
+sed -n '/"key" : /p' trackFeatures_a.txt > trackFeatures_a_key.txt
+sed -i 's|["key" : ,]||g' trackFeatures_a_key.txt
+
+sed -n '/"loudness" : /p' trackFeatures_a.txt > trackFeatures_a_ldns.txt
+sed -i 's|["loudness" : ,]||g' trackFeatures_a_ldns.txt
+
+sed -n '/"mode" : /p' trackFeatures_a.txt > trackFeatures_a_mode.txt
+sed -i 's|["mode" : ,]||g' trackFeatures_a_mode.txt
+
+sed -n '/"speechiness" : /p' trackFeatures_a.txt > trackFeatures_a_spns.txt
+sed -i 's|["speechiness" : ,]||g' trackFeatures_a_spns.txt
+
+sed -n '/"acousticness" : /p' trackFeatures_a.txt > trackFeatures_a_acns.txt
+sed -i 's|["acousticness" : ,]||g' trackFeatures_a_acns.txt
+
+sed -n '/"instrumentalness" : /p' trackFeatures_a.txt > trackFeatures_a_imns.txt
+sed -i 's|["instrumentalness" : ,]||g' trackFeatures_a_imns.txt
+
+sed -n '/"liveness" : /p' trackFeatures_a.txt > trackFeatures_a_lvns.txt
+sed -i 's|["liveness" : ,]||g' trackFeatures_a_lvns.txt
+
+sed -n '/"valence" : /p' trackFeatures_a.txt > trackFeatures_a_vlnc.txt
+sed -i 's|["valence" : ,]||g' trackFeatures_a_vlnc.txt
+
+sed -n '/"tempo" : /p' trackFeatures_a.txt > trackFeatures_a_tempo.txt
+sed -i 's|["tempo" : ,]||g' trackFeatures_a_tempo.txt
+
+sed -n '/"id" : /p' trackFeatures_a.txt > trackFeatures_a_id.txt
+sed 's/ //g' trackFeatures_a_id.txt > trackFeatures_a_id2.txt
+sed -r 's/.{6}//' trackFeatures_a_id2.txt > trackFeatures_a_id.txt
+sed -i 's|[",]||g' trackFeatures_a_id.txt
+
+Track features:
+    "danceability" : 0.228,
+    "energy" : 0.0454,
+    "key" : 4,
+    "loudness" : -27.138,
+    "mode" : 0,
+    "speechiness" : 0.0440,
+    "acousticness" : 0.950,
+    "instrumentalness" : 0.0246,
+    "liveness" : 0.0571,
+    "valence" : 0.0835,
+    "tempo" : 81.923,
+    "id" : "1UR8ItmfUpNwoG8zMuiPXG"
+
+sed -n '/"duration_ms" : /p' trackData_a.txt > trackData_a_durn.txt
+sed -i 's|["duration_ms" : ,]||g' trackData_a_durn.txt
+
+sed -n '/"explicit" : /p' trackData_a.txt > trackData_a_expl.txt
+sed 's/ //g' trackData_a_expl.txt > trackData_a_expl2.txt
+sed '/^\s*$/d' trackData_a_expl2.txt > trackData_a_expl.txt
+sed -r 's/.{11}//' trackData_a_expl.txt > trackData_a_expl2.txt
+sed -i 's|[",]||g' trackData_a_expl2.txt > trackData_a_expl.txt
+
+sed -n '/"popularity" : /p' trackData_a.txt > trackData_a_pply.txt
+sed -i 's|["popularity" : ,]||g' trackData_a_pply.txt
+
+sed -n '/"id" : /p' trackData_a.txt > trackData_a_id.txt
+sed 's/ //g' trackData_a_id.txt > trackData_a_id2.txt
+sed -r 's/.{6}//' trackData_a_id2.txt > trackData_a_id.txt
+sed -i 's|[",]||g' trackData_a_id.txt
+
+Track data:
+    "duration_ms" : 489773,
+    "explicit" : false,
+    "id" : "1UR8ItmfUpNwoG8zMuiPXG",
+    "popularity" : 0,

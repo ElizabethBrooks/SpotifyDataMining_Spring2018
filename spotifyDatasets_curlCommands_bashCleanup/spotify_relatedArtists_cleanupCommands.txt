@@ -1,0 +1,28 @@
+sed -n '/"uri" : "spotify:artist:/p' spotify_playlistArtists_relatedArtists_artistIds1.txt > spotify_playlistArtists_relatedArtists_uri.txt
+sed -n '/"uri" : "spotify:artist:/p' spotify_playlistArtists_relatedArtists_artistIds2.txt >> spotify_playlistArtists_relatedArtists_uri.txt
+sed -n '/"uri" : "spotify:artist:/p' spotify_playlistArtists_relatedArtists_artistIds3.txt >> spotify_playlistArtists_relatedArtists_uri.txt
+sed -n '/"uri" : "spotify:artist:/p' spotify_playlistArtists_relatedArtists_artistIds4.txt >> spotify_playlistArtists_relatedArtists_uri.txt
+sed -n '/"uri" : "spotify:artist:/p' spotify_playlistArtists_relatedArtists_artistIds5.txt >> spotify_playlistArtists_relatedArtists_uri.txt
+awk '!seen[$0]++' spotify_playlistArtists_relatedArtists_uri.txt > spotify_playlistArtists_relatedArtists_uri_noDuplicates.txt
+sed 's/ //g' spotify_playlistArtists_relatedArtists_uri_noDuplicates.txt > spotify_playlistArtists_relatedArtists_uri_noDuplicates2.txt
+sed -r 's/.{22}//' spotify_playlistArtists_relatedArtists_uri_noDuplicates2.txt > spotify_playlistArtists_relatedArtists_uri_noDuplicates.txt
+sed -i 's|["]||g' spotify_playlistArtists_relatedArtists_uri_noDuplicates.txt
+paste -d"\n" spotify_playlistArtists_relatedArtists_uri_noDuplicates.txt spotify_categoryPlaylistTracks_artistIds.txt > spotify_artistIds_US.txt
+awk '!seen[$0]++' spotify_artistIds_US.txt > spotify_artistIds_US_noDuplicates.txt
+wc -l spotify_artistIds_US_noDuplicates.txt
+split -n l/30 spotify_artistIds_US_noDuplicates.txt spotify_artistIds_US_noDuplicates_
+
+wc -l file.txt //Count lines in file
+split -n l/20 file.txt //Split file into pieces
+sed 's/ //g' input.txt > no-spaces.txt //Remove white space
+sed -r 's/.{22}//' input.txt > no-first.txt //Remove first 22 characters of each line
+sed -i 's|["]||g' file.txt //Remove quotes
+awk '!seen[$0]++' file.txt > no-duplicates.txt //Remove duplicates
+sed -i 's/,/ /g' file.txt //Replace commas with spaces
+sed -i 's|[,]||g' file.txt //Remove commas
+sed -i 's/^ *//g' file.txt
+awk '!seen[$0]++' file.txt > file.txt //Remove duplicates
+paste -d, -s file.txt //Append lines of text file comma separated
+perl -pe 's/\n/ / unless eof' file.txt //Append lines of text file space separated
+sed 'n; d' //Keep odd lines
+sed '1d; n; d' //Keep even lines

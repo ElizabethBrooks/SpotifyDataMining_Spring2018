@@ -1,0 +1,24 @@
+sed -n '/"genres" :/p' spotify_relatedArtists_artistData_TodaysTopHits.txt > spotify_relatedArtists_artistData_TodaysTopHits_genres.txt
+sed -n '/"id" :/p' spotify_relatedArtists_artistData_TodaysTopHits.txt > spotify_relatedArtists_artistData_TodaysTopHits_id.txt
+sed -n '/"name" :/p' spotify_relatedArtists_artistData_TodaysTopHits.txt > spotify_relatedArtists_artistData_TodaysTopHits_name.txt
+sed -n '/"type" :/p' spotify_relatedArtists_artistData_TodaysTopHits.txt > spotify_relatedArtists_artistData_TodaysTopHits_type.txt
+sed -n '/"followers" :/p' spotify_relatedArtists_artistData_TodaysTopHits.txt > spotify_relatedArtists_artistData_TodaysTopHits_followers.txt
+sed -n '/"popularity" :/p' spotify_relatedArtists_artistData_TodaysTopHits.txt > spotify_relatedArtists_artistData_TodaysTopHits_popularity.txt
+sed -n '/"uri" :/p' spotify_relatedArtists_artistData_TodaysTopHits.txt > spotify_relatedArtists_artistData_TodaysTopHits_uri.txt
+
+sed -n '/"genres" :/p' spotify_relatedArtists_relatedArtistData_TodaysTopHits.txt > spotify_relatedArtists_relatedArtistData_TodaysTopHits_genres.txt
+sed -n '/"id" :/p' spotify_relatedArtists_relatedArtistData_TodaysTopHits.txt > spotify_relatedArtists_relatedArtistData_TodaysTopHits_id.txt
+sed -n '/"name" :/p' spotify_relatedArtists_relatedArtistData_TodaysTopHits.txt > spotify_relatedArtists_relatedArtistData_TodaysTopHits_name.txt
+sed -n '/"type" :/p' spotify_relatedArtists_relatedArtistData_TodaysTopHits.txt > spotify_relatedArtists_relatedArtistData_TodaysTopHits_type.txt
+sed -n '/"followers" :/p' spotify_relatedArtists_relatedArtistData_TodaysTopHits.txt > spotify_relatedArtists_relatedArtistData_TodaysTopHits_followers.txt
+sed -n '/"popularity" :/p' spotify_relatedArtists_relatedArtistData_TodaysTopHits.txt > spotify_relatedArtists_relatedArtistData_TodaysTopHits_popularity.txt
+
+sed -i 's/,/ /g' file.txt //Replace commas with spaces
+sed -i 's|[,]||g' file.txt //Remove commas
+sed -i 's/^ *//g' file.txt
+awk '!seen[$0]++' file.txt > file.txt //Remove duplicates
+paste -d, -s file.txt //Append lines of text file comma separated
+perl -pe 's/\n/ / unless eof' file.txt //Append lines of text file space separated
+
+sed 'n; d' //Keep odd lines
+sed '1d; n; d' //Keep even lines

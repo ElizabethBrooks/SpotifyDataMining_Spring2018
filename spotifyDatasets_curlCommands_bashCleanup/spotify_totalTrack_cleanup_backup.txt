@@ -1,0 +1,102 @@
+#!/bin/bash
+
+fileids=( a b c d e f g h )
+fileids1=( d c b a )
+fileids2=( e f g h )
+
+for ((i=0;i<${#fileids[@]};++i)); do
+	sed -n '/"danceability" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_dance.txt
+	sed -i 's|["danceability" : ,]||g' trackFeatures_"${fileids[i]}"_dance.txt
+	sed -n '/"energy" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_engy.txt
+	sed -i 's|["energy" : ,]||g' trackFeatures_"${fileids[i]}"_engy.txt
+	sed -n '/"key" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_key.txt
+	sed -i 's|["key" : ,]||g' trackFeatures_"${fileids[i]}"_key.txt
+	sed -n '/"loudness" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_ldns.txt
+	sed -i 's|["loudness" : ,]||g' trackFeatures_"${fileids[i]}"_ldns.txt
+	sed -n '/"mode" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_mode.txt
+	sed -i 's|["mode" : ,]||g' trackFeatures_"${fileids[i]}"_mode.txt
+	sed -n '/"speechiness" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_spns.txt
+	sed -i 's|["speechiness" : ,]||g' trackFeatures_"${fileids[i]}"_spns.txt
+	sed -n '/"acousticness" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_acns.txt
+	sed -i 's|["acousticness" : ,]||g' trackFeatures_"${fileids[i]}"_acns.txt
+	sed -n '/"instrumentalness" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_imns.txt
+	sed -i 's|["instrumentalness" : ,]||g' trackFeatures_"${fileids[i]}"_imns.txt
+	sed -n '/"liveness" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_lvns.txt
+	sed -i 's|["liveness" : ,]||g' trackFeatures_"${fileids[i]}"_lvns.txt
+	sed -n '/"valence" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_vlnc.txt
+	sed -i 's|["valence" : ,]||g' trackFeatures_"${fileids[i]}"_vlnc.txt
+	sed -n '/"tempo" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_tempo.txt
+	sed -i 's|["tempo" : ,]||g' trackFeatures_"${fileids[i]}"_tempo.txt
+	sed -n '/"id" : /p' trackFeatures_"${fileids[i]}".txt > trackFeatures_"${fileids[i]}"_id.txt
+	sed 's/ //g' trackFeatures_"${fileids[i]}"_id.txt > trackFeatures_"${fileids[i]}"_id2.txt
+	sed -r 's/.{6}//' trackFeatures_"${fileids[i]}"_id2.txt > trackFeatures_"${fileids[i]}"_id.txt
+	sed -i 's|[",]||g' trackFeatures_"${fileids[i]}"_id.txt
+	sed -n '/"duration_ms" : /p' trackData_"${fileids[i]}".txt > trackData_"${fileids[i]}"_durn.txt
+	sed -i 's|["duration_ms" : ,]||g' trackData_"${fileids[i]}"_durn.txt
+	sed -n '/"explicit" : /p' trackData_"${fileids[i]}".txt > trackData_"${fileids[i]}"_expl.txt
+	sed 's/ //g' trackData_"${fileids[i]}"_expl.txt > trackData_"${fileids[i]}"_expl2.txt
+	sed -r 's/.{11}//' trackData_"${fileids[i]}"_expl2.txt > trackData_"${fileids[i]}"_expl.txt
+	sed -i 's|[",]||g' trackData_"${fileids[i]}"_expl.txt
+	sed -n '/"popularity" : /p' trackData_"${fileids[i]}".txt > trackData_"${fileids[i]}"_pply.txt
+	sed -i 's|["popularity" : ,]||g' trackData_"${fileids[i]}"_pply.txt
+	grep popularity -A 4 trackData_"${fileids[i]}".txt >> trackData_"${fileids[i]}"_id.txt
+	sed -n '/uri/p' trackData_"${fileids[i]}"_id.txt > trackData_"${fileids[i]}"_id2.txt
+	sed 's/ //g' trackData_"${fileids[i]}"_id2.txt > trackData_"${fileids[i]}"_id.txt
+	sed -r 's/.{21}//' trackData_"${fileids[i]}"_id.txt > trackData_"${fileids[i]}"_id2.txt
+	sed -i 's|[",]||g' trackData_"${fileids[i]}"_id2.txt
+	echo -e "${fileids[i]} tracks data and features cleaned"
+done
+
+for ((i=0;i<${#fileids2[@]};++i)); do
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_dance.txt trackFeatures_"${fileids1[i]}"_dance.txt >> trackFeatures_danceability2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_engy.txt trackFeatures_"${fileids1[i]}"_engy.txt >> trackFeatures_energy2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_key.txt trackFeatures_"${fileids1[i]}"_key.txt >> trackFeatures_key2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_ldns.txt trackFeatures_"${fileids1[i]}"_ldns.txt >> trackFeatures_loudness2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_mode.txt trackFeatures_"${fileids1[i]}"_mode.txt >> trackFeatures_mode2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_spns.txt trackFeatures_"${fileids1[i]}"_spns.txt >> trackFeatures_speechiness2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_acns.txt trackFeatures_"${fileids1[i]}"_acns.txt >> trackFeatures_acousticness2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_imns.txt trackFeatures_"${fileids1[i]}"_imns.txt >> trackFeatures_instrumentalness2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_lvns.txt trackFeatures_"${fileids1[i]}"_lvns.txt >> trackFeatures_liveness2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_vlnc.txt trackFeatures_"${fileids1[i]}"_vlnc.txt >> trackFeatures_valence2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_tempo.txt trackFeatures_"${fileids1[i]}"_tempo.txt >> trackFeatures_tempo2.txt
+	paste -d'\n' trackFeatures_"${fileids2[i]}"_id.txt trackFeatures_"${fileids1[i]}"_id.txt >> trackFeatures_id2.txt
+	paste -d'\n' trackData_"${fileids2[i]}"_durn.txt trackData_"${fileids1[i]}"_durn.txt >> trackData_duration2.txt
+	paste -d'\n' trackData_"${fileids2[i]}"_expl.txt trackData_"${fileids1[i]}"_expl.txt >> trackData_explicit2.txt
+	paste -d'\n' trackData_"${fileids2[i]}"_pply2.txt trackData_"${fileids1[i]}"_pply2.txt >> trackData_popularity3.txt
+	paste -d'\n' trackData_"${fileids2[i]}"_id2.txt trackData_"${fileids1[i]}"_id2.txt >> trackData_id3.txt
+	echo -e "${fileids2[i]} merged with ${fileids1[i]}"
+done
+
+sed '/^\s*$/d' trackFeatures_danceability2.txt > trackFeatures_danceability.txt
+sed '/^\s*$/d' trackFeatures_energy2.txt > trackFeatures_energy.txt
+sed '/^\s*$/d' trackFeatures_key2.txt > trackFeatures_key.txt
+sed '/^\s*$/d' trackFeatures_loudness2.txt > trackFeatures_loudness.txt
+sed '/^\s*$/d' trackFeatures_mode2.txt > trackFeatures_mode.txt
+sed '/^\s*$/d' trackFeatures_speechiness2.txt > trackFeatures_speechiness.txt
+sed '/^\s*$/d' trackFeatures_acousticness2.txt > trackFeatures_acousticness.txt
+sed '/^\s*$/d' trackFeatures_instrumentalness2.txt > trackFeatures_instrumentalness.txt
+sed '/^\s*$/d' trackFeatures_liveness2.txt > trackFeatures_liveness.txt
+sed '/^\s*$/d' trackFeatures_valence2.txt > trackFeatures_valence.txt
+sed '/^\s*$/d' trackFeatures_tempo2.txt > trackFeatures_tempo.txt
+sed '/^\s*$/d' trackFeatures_id2.txt > trackFeatures_id.txt
+sed '/^\s*$/d' trackData_duration2.txt > trackData_duration.txt
+sed '/^\s*$/d' trackData_explicit2.txt > trackData_explicit.txt
+sed '/^\s*$/d' trackData_popularity3.txt > trackData_popularity.txt
+sed '/^\s*$/d' trackData_id3.txt > trackData_id.txt
+
+wc -l trackFeatures_danceability.txt
+wc -l trackFeatures_energy.txt
+wc -l trackFeatures_key.txt
+wc -l trackFeatures_loudness.txt
+wc -l trackFeatures_mode.txt
+wc -l trackFeatures_speechiness.txt
+wc -l trackFeatures_acousticness.txt
+wc -l trackFeatures_instrumentalness.txt
+wc -l trackFeatures_liveness.txt
+wc -l trackFeatures_valence.txt
+wc -l trackFeatures_tempo.txt
+wc -l trackFeatures_id.txt
+wc -l trackData_duration.txt
+wc -l trackData_explicit.txt
+wc -l trackData_popularity.txt
+wc -l trackData_id.txt

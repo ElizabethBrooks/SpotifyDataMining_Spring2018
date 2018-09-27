@@ -1,0 +1,4 @@
+sed -i 's|[,]||g' artistData_TodaysTopHits_name.txt
+sed -i 's/^ *//g' artistData_TodaysTopHits_name.txt
+
+awk '!seen[$0]++' file.txt > file.txt
